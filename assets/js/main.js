@@ -3,13 +3,13 @@
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCFoLdL8GczI9OAzpy4fJZvCTk7EcmOFvo",
-  authDomain: "ibrahim-diary-6031f.firebaseapp.com",
-  projectId: "ibrahim-diary-6031f",
-  storageBucket: "ibrahim-diary-6031f.firebasestorage.app",
-  messagingSenderId: "693904501239",
-  appId: "1:693904501239:web:7d9d7e400d68fad12ca6f2",
-  measurementId: "G-H9X2WDZTJ9",
+  apiKey: "AIzaSyDFGnQiw_DzZbmCTgSc09L4a8MvzaG5W_Q",
+  authDomain: "diary-webapp-9afb0.firebaseapp.com",
+  projectId: "diary-webapp-9afb0",
+  storageBucket: "diary-webapp-9afb0.firebasestorage.app",
+  messagingSenderId: "582463596946",
+  appId: "1:582463596946:web:ff9874ba3d9e8a5430f94b",
+  measurementId: "G-HC17Q3BGSL",
 };
 
 // Initialize Firebase
