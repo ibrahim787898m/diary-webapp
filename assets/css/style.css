@@ -764,3 +764,38 @@ button:active {
     padding: 0;
   }
 }
+
+/* ===== Fix collapse toggle (chevron) on mobile ===== */
+
+.collapse-toggle{
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  padding: 0 !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 12px !important;
+}
+
+.collapse-toggle .chev{
+  font-size: 16px !important;
+  line-height: 1 !important;
+  transform-origin: center !important;
+}
+
+/* Make sure it never gets squeezed */
+.calendar-actions{
+  flex-wrap: nowrap !important;
+  overflow-x: auto;            /* if too many buttons, scroll horizontally */
+  -webkit-overflow-scrolling: touch;
+  gap: 10px;
+}
+
+/* Hide scrollbar on mobile (optional) */
+.calendar-actions::-webkit-scrollbar{
+  display: none;
+}
