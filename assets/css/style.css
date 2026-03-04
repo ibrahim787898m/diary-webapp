@@ -698,3 +698,69 @@ button:active {
 #calendar-panel.collapsed .collapse-toggle .chev{
   transform: rotate(-90deg);
 }
+
+/* ===== Fix calendar header button misplacement (mobile) ===== */
+
+/* Make the calendar header layout stable */
+.calendar-nav-title{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Keep title readable and prevent weird wrapping */
+#calendar-title{
+  line-height: 1.1;
+  word-break: keep-all;
+}
+
+/* Right side buttons container */
+.calendar-actions{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap; /* allow wrap but keep it neat */
+}
+
+/* Make each button keep its shape */
+.calendar-actions button,
+.calendar-actions .view-toggle-btn,
+.calendar-actions .calendar-button,
+.calendar-actions .collapse-toggle{
+  width: auto;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Segmented control should never stretch full width */
+.segmented-control{
+  flex: 0 0 auto;
+}
+
+/* Mobile-specific tighter layout */
+@media (max-width: 480px){
+  .calendar-nav-title{
+    grid-template-columns: 1fr; /* stack: title then actions */
+    gap: 10px;
+  }
+
+  .calendar-actions{
+    justify-content: flex-start;
+  }
+
+  /* Make controls consistent height */
+  .calendar-button,
+  .view-toggle-btn,
+  .filters-toggle,
+  .collapse-toggle{
+    height: 38px;
+    padding: 0 12px;
+  }
+
+  .collapse-toggle{
+    width: 38px;
+    padding: 0;
+  }
+}
