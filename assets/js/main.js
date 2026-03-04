@@ -1082,3 +1082,16 @@ auth.onAuthStateChanged((user) => {
     logoutBtn.style.display = "none";
   }
 });
+
+
+const panel = document.getElementById("calendar-panel");
+const body = document.getElementById("calendar-collapse");
+const btn = document.getElementById("calendar-collapse-btn");
+
+if (panel && body && btn) {
+  btn.addEventListener("click", () => {
+    const isClosed = body.classList.toggle("closed");
+    panel.classList.toggle("collapsed", isClosed);
+    btn.setAttribute("aria-expanded", String(!isClosed));
+  });
+}

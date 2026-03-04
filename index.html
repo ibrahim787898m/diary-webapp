@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -42,72 +42,103 @@
         </div>
 
         <!-- Calendar Navigation Section -->
-        <div class="calendar-navigation">
+        <div class="calendar-navigation" id="calendar-panel">
+          <!-- Header row always visible -->
           <div class="calendar-nav-title">
             <span id="calendar-title">March 2025</span>
-            <div>
+
+            <div class="calendar-actions">
               <button class="calendar-button" id="today-btn">Today</button>
-              <button class="view-toggle-btn active" id="calendar-view-btn">
-                Calendar
+
+              <div
+                class="segmented-control"
+                role="group"
+                aria-label="View toggle"
+              >
+                <button class="view-toggle-btn active" id="calendar-view-btn">
+                  Calendar
+                </button>
+                <button class="view-toggle-btn" id="list-view-btn">List</button>
+              </div>
+
+              <!-- ✅ NEW: Collapse toggle -->
+              <button
+                class="collapse-toggle"
+                id="calendar-collapse-btn"
+                aria-expanded="true"
+                aria-controls="calendar-collapse"
+              >
+                <span class="chev">▾</span>
               </button>
-              <button class="view-toggle-btn" id="list-view-btn">List</button>
             </div>
           </div>
 
-          <div class="filter-section">
-            <div class="filter-dropdown">
-              <label for="filter-year" class="filter-label">Year</label>
-              <select id="filter-year"></select>
-            </div>
-            <div class="filter-dropdown">
-              <label for="filter-month" class="filter-label">Month</label>
-              <select id="filter-month">
-                <option value="0">January</option>
-                <option value="1">February</option>
-                <option value="2">March</option>
-                <option value="3">April</option>
-                <option value="4">May</option>
-                <option value="5">June</option>
-                <option value="6">July</option>
-                <option value="7">August</option>
-                <option value="8">September</option>
-                <option value="9">October</option>
-                <option value="10">November</option>
-                <option value="11">December</option>
-              </select>
-            </div>
-            <div class="filter-dropdown">
-              <label for="filter-day" class="filter-label">Day</label>
-              <select id="filter-day">
-                <option value="all">All Days</option>
-              </select>
-            </div>
-          </div>
+          <!-- ✅ Everything below becomes collapsible -->
+          <div class="collapse-body open" id="calendar-collapse">
+            <div class="filter-section">
+              <div class="filter-dropdown">
+                <label for="filter-year" class="filter-label">Year</label>
+                <select id="filter-year"></select>
+              </div>
 
-          <div id="active-filters" class="active-filters" style="display: none">
-            <div id="filter-tags"></div>
-            <button id="clear-filters" class="clear-filters">Clear All</button>
-          </div>
+              <div class="filter-dropdown">
+                <label for="filter-month" class="filter-label">Month</label>
+                <select id="filter-month">
+                  <option value="0">January</option>
+                  <option value="1">February</option>
+                  <option value="2">March</option>
+                  <option value="3">April</option>
+                  <option value="4">May</option>
+                  <option value="5">June</option>
+                  <option value="6">July</option>
+                  <option value="7">August</option>
+                  <option value="8">September</option>
+                  <option value="9">October</option>
+                  <option value="10">November</option>
+                  <option value="11">December</option>
+                </select>
+              </div>
 
-          <div class="calendar-controls">
-            <button class="calendar-button" id="prev-month">
-              &lt; Previous
-            </button>
-            <button class="calendar-button" id="next-month">Next &gt;</button>
-          </div>
-
-          <div id="calendar-container">
-            <div class="calendar-grid" id="calendar-days-header">
-              <div class="calendar-day-header">Sun</div>
-              <div class="calendar-day-header">Mon</div>
-              <div class="calendar-day-header">Tue</div>
-              <div class="calendar-day-header">Wed</div>
-              <div class="calendar-day-header">Thu</div>
-              <div class="calendar-day-header">Fri</div>
-              <div class="calendar-day-header">Sat</div>
+              <div class="filter-dropdown">
+                <label for="filter-day" class="filter-label">Day</label>
+                <select id="filter-day">
+                  <option value="all">All Days</option>
+                </select>
+              </div>
             </div>
-            <div class="calendar-grid" id="calendar-days">
-              <!-- Calendar days will be dynamically added here -->
+
+            <div
+              id="active-filters"
+              class="active-filters"
+              style="display: none"
+            >
+              <div id="filter-tags"></div>
+              <button id="clear-filters" class="clear-filters">
+                Clear All
+              </button>
+            </div>
+
+            <div class="calendar-controls">
+              <button class="calendar-button" id="prev-month">
+                &lt; Previous
+              </button>
+              <button class="calendar-button" id="next-month">Next &gt;</button>
+            </div>
+
+            <div id="calendar-container">
+              <div class="calendar-grid" id="calendar-days-header">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+              </div>
+
+              <div class="calendar-grid" id="calendar-days">
+                <!-- Calendar days will be dynamically added here -->
+              </div>
             </div>
           </div>
         </div>

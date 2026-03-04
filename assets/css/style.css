@@ -1,21 +1,33 @@
+/* =========================
+   Apple Premium Dark Theme
+   Full CSS (drop-in replacement)
+   ========================= */
+
+/* --- Theme Tokens --- */
 :root {
-  --primary: #ffffff;
-  --primary-hover: #e5e5e5;
+  /* Apple Dark Surfaces */
+  --background: #1c1c1e;  /* systemBackground */
+  --card-bg: #2c2c2e;     /* secondarySystemBackground */
+  --surface: #3a3a3c;     /* tertiarySystemBackground */
 
-  --primary-light: #2c2c2e;
+  /* Text */
+  --text: #f2f2f7;        /* label */
+  --text-light: #8e8e93;  /* secondaryLabel */
 
-  --background: #1c1c1e;   /* Apple dark background */
-  --card-bg: #2c2c2e;      /* Apple card color */
+  /* Borders / Dividers */
+  --border: #3a3a3c;
 
-  --text: #f2f2f7;         /* Apple off-white */
-  --text-light: #8e8e93;   /* Apple secondary text */
+  /* Accent (Apple blue) */
+  --primary: #0a84ff;
+  --primary-hover: #409cff;
+  --primary-light: rgba(10, 132, 255, 0.18);
 
-  --border: #3a3a3c;       /* subtle border */
-
+  /* Status */
   --success: #30d158;
   --error: #ff453a;
 }
 
+/* --- Base Reset --- */
 * {
   margin: 0;
   padding: 0;
@@ -29,14 +41,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-body {
-  background-color: var(--background);
-  color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
 
+/* --- Layout --- */
 .container {
   width: 100%;
   max-width: 1000px;
@@ -58,15 +66,17 @@ header {
 
 h1 {
   font-size: 2.2rem;
-  color: var(--primary);
+  color: var(--text);
   font-weight: 700;
 }
 
+/* --- Cards / Panels --- */
 .login-container,
 .diary-entry {
   background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   padding: 30px;
   margin: auto;
   max-width: 450px;
@@ -87,25 +97,27 @@ h1 {
 label {
   display: block;
   margin-bottom: 8px;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--text);
 }
 
+/* --- Inputs (Apple-like) --- */
 input,
 textarea,
 select {
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-input, select {
-  background: #3a3a3c;
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-light);
 }
 
 input:focus,
@@ -113,6 +125,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
 }
 
 textarea {
@@ -120,25 +133,32 @@ textarea {
   resize: vertical;
 }
 
+/* --- Buttons (never invisible) --- */
 button {
-  background: #3a3a3c;   /* slightly lighter than card */
-  color: #ffffff;        /* pure white text */
-  border: none;
+  background: var(--primary);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.05s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
 button:hover {
-  background: #48484a;
+  background: var(--primary-hover);
 }
 
+button:active {
+  transform: scale(0.99);
+}
+
+/* Logout button (text-style) */
 #logout-btn {
   background: none;
   border: none;
   color: var(--primary);
-  font-weight: 500;
+  font-weight: 600;
   width: auto;
   padding: 5px 10px;
 }
@@ -147,24 +167,28 @@ button:hover {
   text-decoration: underline;
 }
 
+/* --- Messages --- */
 .message {
   text-align: center;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 10px;
   margin-bottom: 20px;
   display: none;
 }
 
 .error {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(255, 69, 58, 0.12);
   color: var(--error);
+  border: 1px solid rgba(255, 69, 58, 0.25);
 }
 
 .success {
-  background-color: rgba(16, 185, 129, 0.1);
+  background-color: rgba(48, 209, 88, 0.12);
   color: var(--success);
+  border: 1px solid rgba(48, 209, 88, 0.25);
 }
 
+/* --- Controls --- */
 .diary-controls {
   display: flex;
   justify-content: space-between;
@@ -174,30 +198,51 @@ button:hover {
   gap: 15px;
 }
 
+/* Search should look like Apple input */
 .search-box {
-  padding: 10px 15px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   width: 250px;
   font-size: 0.95rem;
+  background: var(--surface);
+  color: var(--text);
 }
 
+.search-box::placeholder {
+  color: var(--text-light);
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* Primary action button (Apple blue) */
 .new-entry-btn {
   background-color: var(--primary);
-  color: white;
+  color: #ffffff;
   padding: 10px 20px;
-  border-radius: 6px;
+  border-radius: 12px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   min-width: 120px;
   text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transition: background-color 0.2s ease, transform 0.05s ease;
 }
 
 .new-entry-btn:hover {
   background-color: var(--primary-hover);
 }
 
+.new-entry-btn:active {
+  transform: scale(0.99);
+}
+
+/* --- Entries Grid --- */
 .entries-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -206,8 +251,9 @@ button:hover {
 
 .entry-card {
   background: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   padding: 20px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -217,7 +263,7 @@ button:hover {
 
 .entry-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
 }
 
 .entry-header {
@@ -228,7 +274,7 @@ button:hover {
 }
 
 .entry-title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   color: var(--text);
 }
@@ -250,6 +296,7 @@ button:hover {
   flex-grow: 1;
 }
 
+/* --- Modal --- */
 .modal {
   display: none;
   position: fixed;
@@ -257,19 +304,21 @@ button:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.55);
   z-index: 1000;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(6px);
 }
 
 .modal-content {
   background-color: var(--card-bg);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 90%;
   max-width: 600px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
   position: relative;
 }
 
@@ -285,6 +334,11 @@ button:hover {
   cursor: pointer;
 }
 
+.close-modal:hover {
+  color: var(--text);
+}
+
+/* --- Button Groups --- */
 .button-group {
   display: flex;
   gap: 10px;
@@ -295,15 +349,18 @@ button:hover {
   flex: 1;
 }
 
+/* Delete button (Apple red) */
 .delete-btn {
-  background-color: var(--error);
+  background-color: rgba(255, 69, 58, 0.18);
+  color: var(--error);
+  border: 1px solid rgba(255, 69, 58, 0.35);
 }
 
 .delete-btn:hover {
-  background-color: #dc2626;
+  background-color: rgba(255, 69, 58, 0.28);
 }
 
-/* Empty state styling */
+/* --- Empty state --- */
 .empty-state {
   text-align: center;
   margin: 50px auto;
@@ -314,34 +371,33 @@ button:hover {
   margin-bottom: 20px;
 }
 
-/* Pagination styling */
+/* --- Pagination --- */
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  gap: 5px;
+  gap: 8px;
 }
 
 .pagination-button {
   background-color: var(--card-bg);
   color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 8px 12px;
   font-size: 0.9rem;
   cursor: pointer;
   width: auto;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .pagination-button:hover:not(.active, .disabled) {
-  background-color: var(--primary-light);
-  color: var(--primary);
+  background-color: #3a3a3c;
 }
 
 .pagination-button.active {
   background-color: var(--primary);
-  color: white;
+  color: #ffffff;
   border-color: var(--primary);
 }
 
@@ -357,18 +413,19 @@ button:hover {
   margin-top: 10px;
 }
 
-/* Calendar Navigation Styling */
+/* --- Calendar Navigation --- */
 .calendar-navigation {
   background: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   padding: 15px;
   margin-bottom: 20px;
 }
 
 .calendar-nav-title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 15px;
   color: var(--text);
   display: flex;
@@ -383,23 +440,24 @@ button:hover {
   margin-bottom: 15px;
 }
 
+/* Calendar previous/next */
 .calendar-button {
-  background-color: var(--primary-light);
+  background-color: rgba(10, 132, 255, 0.18);
   color: var(--primary);
-  border: none;
-  border-radius: 6px;
+  border: 1px solid rgba(10, 132, 255, 0.25);
+  border-radius: 12px;
   padding: 8px 12px;
   cursor: pointer;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700;
   width: auto;
 }
 
 .calendar-button:hover {
-  background-color: var(--primary);
-  color: white;
+  background-color: rgba(10, 132, 255, 0.28);
 }
 
+/* Calendar grid */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -408,7 +466,7 @@ button:hover {
 
 .calendar-day-header {
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.8rem;
   color: var(--text-light);
   padding: 5px;
@@ -417,36 +475,38 @@ button:hover {
 .calendar-day {
   text-align: center;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s;
+  color: var(--text);
 }
 
 .calendar-day:hover:not(.empty, .selected) {
-  background-color: var(--primary-light);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .calendar-day.today {
   border: 1px solid var(--primary);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .calendar-day.has-entries {
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .calendar-day.selected {
   background-color: var(--primary);
-  color: white;
+  color: #ffffff;
 }
 
 .calendar-day.empty {
-  color: var(--border);
+  color: rgba(255, 255, 255, 0.18);
   cursor: default;
 }
 
+/* --- Filters --- */
 .filter-section {
   display: flex;
   flex-wrap: wrap;
@@ -467,6 +527,7 @@ button:hover {
   color: var(--text-light);
 }
 
+/* --- View Toggle Buttons --- */
 .view-toggle {
   display: flex;
   align-items: center;
@@ -478,30 +539,36 @@ button:hover {
 .view-toggle-btn {
   background-color: var(--card-bg);
   color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   padding: 8px 15px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   width: auto;
+}
+
+.view-toggle-btn:hover {
+  background-color: #3a3a3c;
 }
 
 .view-toggle-btn.active {
   background-color: var(--primary);
-  color: white;
+  color: #ffffff;
   border-color: var(--primary);
 }
 
+/* --- Active Filters Tags --- */
 .active-filter-tag {
   display: inline-block;
-  background-color: var(--primary-light);
+  background-color: rgba(10, 132, 255, 0.18);
   color: var(--primary);
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 999px;
   font-size: 0.8rem;
   margin-right: 5px;
   margin-bottom: 5px;
+  border: 1px solid rgba(10, 132, 255, 0.18);
 }
 
 .active-filter-tag button {
@@ -533,6 +600,7 @@ button:hover {
   margin-left: 10px;
 }
 
+/* --- Responsive --- */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
@@ -576,4 +644,57 @@ button:hover {
     padding: 5px;
     font-size: 0.8rem;
   }
+}
+
+/* Keep actions in one row */
+.calendar-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Small Apple-like chevron button */
+.collapse-toggle{
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapse-toggle:hover{
+  background: rgba(255,255,255,0.10);
+}
+
+.collapse-toggle .chev{
+  display: inline-block;
+  transition: transform 0.18s ease;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Collapsible body animation */
+.collapse-body{
+  overflow: hidden;
+  max-height: 2000px;         /* big enough to fit content */
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 0.28s ease, opacity 0.18s ease, transform 0.18s ease;
+}
+
+.collapse-body.closed{
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* Rotate chevron when closed */
+#calendar-panel.collapsed .collapse-toggle .chev{
+  transform: rotate(-90deg);
 }
